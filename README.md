@@ -73,7 +73,7 @@ Table of available parsers (as of June 3, 2015)
 
 Name          |       Object to Enrich             |      Status              |   Notes            | URl
 --------------|------------------------------------|--------------------------|--------------------|--------------
-Skeleton      | [Sample](http://bit.ly/1ESeoeI)    |       Draft              |  Handles most addresses, but cannot distinguish between referenced location and meeting location yet.                 |  ([Address Parser Repo](https://github.com/CityOfNewYork/addressparser)
+Skeleton      | refLocation					       |       Draft              |  Handles most addresses, but cannot distinguish between referenced location and meeting location yet.                 |  ([Address Parser Repo](https://github.com/CityOfNewYork/addressparser)
 
 
 
