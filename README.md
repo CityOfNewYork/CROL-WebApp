@@ -1,4 +1,4 @@
-# City Record Online Workgroup (CROW) - Schema
+# City Record Online Workgroup (CROW) - WebApp
 
 This is the main repository containing efforts pertaining to the web app development of CROW. For parsing libraries, see https://github.com/CityOfNewYork/CROL-Parsing or https://github.com/CityOfNewYork/CROL-Schema for parsing.
 
@@ -33,15 +33,15 @@ To invoke the parsers, the client calls the web app specifying the document type
 
 ###Technologies
 
-Python
-Mongo DB
-JSON, JSON-LD
-JSON SChema
-REST API
-GitHub
-Git
-Java
-Heroku & AWS
+ * Python
+ * Mongo DB
+ * JSON, JSON-LD
+ * JSON SChema
+ * REST API
+ * GitHub
+ * Git
+ * Java
+ * Heroku & AWS
 
 
 
@@ -73,7 +73,7 @@ Table of available parsers (as of June 3, 2015)
 
 Name          |       Object to Enrich             |      Status              |   Notes            | URl
 --------------|------------------------------------|--------------------------|--------------------|--------------
-Skeleton      | refLocation					       |       Draft              |  Handles most addresses, but cannot distinguish between referenced location and meeting location yet.                 |  ([Address Parser Repo](https://github.com/CityOfNewYork/addressparser)
+Address Parser      | refLocation					       |       Draft              |  Handles most addresses, but cannot distinguish between referenced location and meeting location yet.                 |  ([Address Parser Repo](https://github.com/CityOfNewYork/addressparser)
 
 
 
@@ -85,7 +85,11 @@ The web app is currently deployed at:
 
 http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice
 
-PS. Interactive documentation (Swagger) will be available shortly.
+NB. Remeber to 
+ * only pass cammelCase for the terms (c.f. "requestId")
+ * specify to specify content-type in the header (for POST & GET)
+	Content-Type: application/json 	
+
 
 
 
@@ -93,10 +97,6 @@ PS. Interactive documentation (Swagger) will be available shortly.
 
 To POST one or multiple JSON objects, simply use the POST to the endpoint, passing the JSON as an array.
 
-
-NB. Remeber to 
- * only pass cammelCase
- * specify documementType (WIP)
 
 
 Example:
