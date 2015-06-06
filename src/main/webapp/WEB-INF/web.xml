@@ -4,6 +4,8 @@
 	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
 	version="2.5">
 
+	<display-name>Commune Crol API Server</display-name>
+
 	<env-entry>
 		<env-entry-name>spring.profiles.active</env-entry-name>
 		<env-entry-type>java.lang.String</env-entry-type>

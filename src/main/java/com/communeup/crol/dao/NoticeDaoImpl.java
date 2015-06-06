@@ -2,11 +2,9 @@ package com.communeup.crol.dao;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
-import org.joda.time.DateTime;
-import org.joda.time.format.DateTimeFormatter;
-import org.joda.time.format.ISODateTimeFormat;
 import org.springframework.stereotype.Repository;
 
 import com.communeup.crol.domain.Notice;
@@ -113,7 +111,7 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@SuppressWarnings({ "resource", "deprecation", "unused" })
 	private DBCollection getTable(String tableName) {
-//		MongoClient mongo = new MongoClient("ec2-52-6-170-221.compute-1.amazonaws.com", 27017);
+//		MongoClient mongo = new MongoClient("52.6.170.221", 27017);
 		MongoClient mongo = new MongoClient("localhost", 27017);
 
 		if (mongo != null) {
@@ -133,21 +131,21 @@ public class NoticeDaoImpl implements NoticeDao {
 
 	@Override
 	public List<Notice> getNoticeAfter(String timestamp) {
+		Date date = getDateFromString(timestamp);
+
 		System.out.println("Query by latest timestamp in dao impl : " + timestamp);
+
 		List<Notice> notices = new ArrayList<Notice>();
 
 		DBCollection noticeTable = getTable("notice");
 
 		if (noticeTable != null) {
-			DateTimeFormatter parser = ISODateTimeFormat.dateTime();
-			DateTime date = parser.parseDateTime(timestamp);
-
-			BasicDBObject query = new BasicDBObject("updatedDate", new BasicDBObject("$gte", date));
-
-			DBCursor cursor = noticeTable.find(query);
-			System.out.println("Cursor : " + cursor);
-
 			try {
+				BasicDBObject query = new BasicDBObject("updatedDate", new BasicDBObject("$gte", date));
+
+				DBCursor cursor = noticeTable.find(query);
+				System.out.println("Cursor : " + cursor);
+
 				while (cursor.hasNext()) {
 					DBObject object = cursor.next();
 					System.out.println("One Object Found : " + object);
@@ -170,11 +168,18 @@ public class NoticeDaoImpl implements NoticeDao {
 		return notices;
 	}
 
-	// ec2-52-6-170-221.compute-1.amazonaws.com
-//	public static void main(String[] args) {
-//		NoticeDaoImpl dao = new NoticeDaoImpl();
-//		List<Notice> list = dao.getNoticeAfter("2015-06-03T04:30:08.441Z");
-//		System.out.println(list);
-//	}
+	@SuppressWarnings("deprecation")
+	private Date getDateFromString(String timestamp) {
+		int year = Integer.parseInt(timestamp.substring(0, timestamp.indexOf("-")));
+		int month = Integer.parseInt(timestamp.substring(timestamp.indexOf("-") + 1, timestamp.lastIndexOf("-")));
+		int date = Integer.parseInt(timestamp.substring(timestamp.lastIndexOf("-") + 1));
+		return new Date(year - 1900, month - 1, date);
+	}
+
+	public static void main(String[] args) {
+		NoticeDaoImpl dao = new NoticeDaoImpl();
+		List<Notice> notices = dao.getNoticeAfter("2014-06-03");
+		System.out.println(notices.size());
+	}
 
 }

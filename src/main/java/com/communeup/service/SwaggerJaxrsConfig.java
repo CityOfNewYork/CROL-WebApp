@@ -15,7 +15,7 @@ import com.wordnik.swagger.reader.ClassReaders;
 @WebServlet(name = "SwaggerJaxrsConfig", loadOnStartup = 1)
 public class SwaggerJaxrsConfig extends HttpServlet {
 
-	private static final long serialVersionUID = -5289494086418829083L;
+	private static final long serialVersionUID = 1L;
 
 	@Override
 	public void init(ServletConfig servletConfig) {
@@ -23,15 +23,12 @@ public class SwaggerJaxrsConfig extends HttpServlet {
 			super.init(servletConfig);
 			SwaggerConfig swaggerConfig = new SwaggerConfig();
 			ConfigFactory.setConfig(swaggerConfig);
-			swaggerConfig.setBasePath("http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/rest");
-//			swaggerConfig.setBasePath("http://localhost:8080/crol/rest");
+			swaggerConfig.setBasePath("http://localhost:8080/crol");
 			swaggerConfig.setApiVersion("1.0.0");
 			ScannerFactory.setScanner(new DefaultJaxrsScanner());
 			ClassReaders.setReader(new DefaultJaxrsApiReader());
 		} catch (ServletException e) {
-			e.printStackTrace();
 			System.out.println(e.getMessage());
 		}
 	}
-
 }

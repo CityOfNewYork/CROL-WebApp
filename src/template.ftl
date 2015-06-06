@@ -80,25 +80,8 @@
   ],
 "attributes": {
   "@type": "http://publicnotice.io/Attributes",
-  "refLocation":[
-    {
-      "@type": "Place",
-      "@context": "http://schema.org",
-      "address": {
-          "@type": "PostalAddress",
-          "addressLocality": "",
-          "addressRegion": "",
-          "postalCode": "",
-          "streetAddress": "",
-          "borough": "" 
-        },
-      "geo": {
-          "@type": "",
-          "latitude": "",
-          "longitude": ""
-        }
-        }
-      ],
+${ParserOutput}
+,
   "refOrganization": [
   {
       "@type": "Organization",

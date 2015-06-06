@@ -13,6 +13,7 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.springframework.stereotype.Controller;
 
@@ -35,71 +36,87 @@ public class CommuneCrolController extends BaseController {
 	@Path("/{noticeId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Get Notice using noticeId", notes = "Get Notice using noticeId .")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 500, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
-	public String getNotice(@PathParam("noticeId") String noticeId) {
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
+	public Response getNotice(@PathParam("noticeId") String noticeId) {
 		Notice notice = crolService.fetch(noticeId);
 
-		if (notice != null)
-			return notice.getNoticeText();
-		else
-			return "NOT FOUND";
+		if (notice != null) {
+			return Response.status(Status.OK).entity(notice.getNoticeText()).build();
+		} else {
+			return Response.status(Status.BAD_REQUEST).entity("Notice Id doesn't Exist ").build();
+		}
 	}
 
 	@GET
 	@Path("/latest/{timestamp}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Get Notice using noticeId", notes = "Get Notice using noticeId .")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 500, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
-	public List<String> getNoticesAfter(@PathParam("timestamp") String timestamp) {
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
+	public Response getNoticesAfter(@PathParam("timestamp") String timestamp) {
 		System.out.println("Query by latest timestamp : " + timestamp);
 		List<Notice> notices = crolService.fetchAfter(timestamp);
 
 		List<String> texts = new ArrayList<String>();
 		for (Notice notice : notices) {
-			texts.add(notice.getNoticeText());
+			if (notice.getNoticeText() != null) {
+				texts.add(notice.getNoticeText());
+			}
 		}
 
-		return texts;
+		if (texts.size() == 0) {
+			return Response.status(Status.BAD_REQUEST).entity("No Notices Found after the given Date : " + timestamp).build();
+		}
+
+		return Response.status(200).entity(texts).build();
 	}
-	
+
 	@POST
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Create Notice using given Payload", notes = "Create Notice using given Payload .")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "NOTICE CREATED"), @ApiResponse(code = 500, message = "Something wrong in Server") })
-	public Response.Status saveJson(List<CrolInput> notices) {
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "NOTICE CREATED"), @ApiResponse(code = 400, message = "Something wrong in Server") })
+	public Response saveJson(List<CrolInput> notices) {
 		try {
 			for (CrolInput noticeInput : notices) {
 				crolService.parseAndSave(noticeInput);
 			}
 		} catch (Exception ex) {
-			Response.Status.BAD_REQUEST.name();
+			return Response.status(Status.BAD_REQUEST).entity("Invalid JSON : " + ex.getMessage()).build();
 		}
 
-		return Response.Status.OK;
+		return Response.status(Status.OK).entity("Notice Added.").build();
 	}
 
 	@PUT
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Update Notice using noticeId", notes = "Update Notice using noticeId .")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "NOTICE UPDATED"), @ApiResponse(code = 500, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
-	public Response.Status updateJson(List<CrolInput> notices) {
-		for (CrolInput noticeInput : notices) {
-			crolService.parseAndUpdate(noticeInput);
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "NOTICE UPDATED"), @ApiResponse(code = 400, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
+	public Response updateJson(List<CrolInput> notices) {
+		try {
+			for (CrolInput noticeInput : notices) {
+				crolService.parseAndUpdate(noticeInput);
+			}
+		} catch(Exception ex) {
+			return Response.status(Status.BAD_REQUEST).entity("Invalid JSON : " + ex.getMessage()).build();
 		}
 
-		return Response.Status.OK;
+		return Response.status(Status.OK).entity("Notice Updated.").build();
 	}
 
 	@DELETE
 	@Path("/{noticeId}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Delete Notice using noticeId", notes = "Delete Notice using noticeId .")
-	@ApiResponses(value = { @ApiResponse(code = 200, message = "NOTICE DELETED"), @ApiResponse(code = 500, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
-	public Response.Status deleteJson(@PathParam("noticeId") String noticeId) {
-		crolService.delete(noticeId);
-		return Response.Status.OK;
+	@ApiResponses(value = { @ApiResponse(code = 200, message = "NOTICE DELETED"), @ApiResponse(code = 400, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
+	public Response deleteJson(@PathParam("noticeId") String noticeId) {
+		try {
+			crolService.delete(noticeId);
+		} catch (Exception ex) {
+			return Response.status(Status.BAD_REQUEST).entity("Invalid JSON : " + ex.getMessage()).build();
+		}
+
+		return Response.status(Status.OK).entity("Notice Deleted.").build();
 	}
 
 }
