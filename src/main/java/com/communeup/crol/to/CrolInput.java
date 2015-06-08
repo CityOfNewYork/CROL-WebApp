@@ -162,8 +162,8 @@ public class CrolInput {
 		this.phoneRequested = PhoneRequested;
 	}
 
-	public Long getSpecialCaseReasonCode() {
-		return specialCaseReasonCode;
+	public String getSpecialCaseReasonCode() {
+		return (specialCaseReasonCode == null) ? "" : specialCaseReasonCode.toString();
 	}
 
 	public void setSpecialCaseReasonCode(Long SpecialCaseReasonCode) {
@@ -234,8 +234,8 @@ public class CrolInput {
 		this.otherInfo = otherInfo;
 	}
 
-	public Long getTypeOfNoticeCode() {
-		return typeOfNoticeCode;
+	public String getTypeOfNoticeCode() {
+		return (typeOfNoticeCode == null) ? "" : typeOfNoticeCode.toString();
 	}
 
 	public void setTypeOfNoticeCode(Long TypeOfNoticeCode) {
@@ -298,8 +298,8 @@ public class CrolInput {
 		this.agencyDivision = AgencyDivision;
 	}
 
-	public Long getSectionId() {
-		return sectionId;
+	public String getSectionId() {
+		return (sectionId == null) ? "" : sectionId.toString();
 	}
 
 	public void setSectionId(Long SectionId) {
@@ -370,16 +370,16 @@ public class CrolInput {
 		this.printout = Printout;
 	}
 
-	public Long getSelectionMethodCode() {
-		return selectionMethodCode;
+	public String getSelectionMethodCode() {
+		return (selectionMethodCode == null) ? "" : selectionMethodCode.toString();
 	}
 
 	public void setSelectionMethodCode(Long SelectionMethodCode) {
 		this.selectionMethodCode = SelectionMethodCode;
 	}
 
-	public Long getCategoryCode() {
-		return categoryCode;
+	public String getCategoryCode() {
+		return (categoryCode == null) ? "" : categoryCode.toString();
 	}
 
 	public void setCategoryCode(Long CategoryCode) {
@@ -400,6 +400,18 @@ public class CrolInput {
 
 	public void setConfirmationNumber(String ConfirmationNumber) {
 		this.confirmationNumber = ConfirmationNumber;
+	}
+
+	public Object getNoticeType() {
+		if (typeOfNoticeCode == 1 || typeOfNoticeCode == 3) {
+			return "Tender";
+		} else if (typeOfNoticeCode == 2 || typeOfNoticeCode == 4) {
+			return "Award";
+		} else if (typeOfNoticeCode == 11) {
+			return "PublicHearing";
+		}
+
+		return "Other";
 	}
 
 }

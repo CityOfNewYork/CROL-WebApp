@@ -1,6 +1,5 @@
 package com.communeup.web.rest;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ws.rs.Consumes;
@@ -38,7 +37,7 @@ public class CommuneCrolController extends BaseController {
 	@ApiOperation(value = "Get Notice using noticeId", notes = "Get Notice using noticeId .")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
 	public Response getNotice(@PathParam("noticeId") String noticeId) {
-		Notice notice = crolService.fetch(noticeId);
+		Notice notice = getNoticeForId(noticeId);
 
 		if (notice != null) {
 			return Response.status(Status.OK).entity(notice.getNoticeText()).build();
@@ -47,27 +46,36 @@ public class CommuneCrolController extends BaseController {
 		}
 	}
 
+	private Notice getNoticeForId(String noticeId) {
+		return crolService.fetch(noticeId);
+	}
+
 	@GET
 	@Path("/latest/{timestamp}")
 	@Produces(MediaType.APPLICATION_JSON)
 	@ApiOperation(value = "Get Notice using noticeId", notes = "Get Notice using noticeId .")
 	@ApiResponses(value = { @ApiResponse(code = 200, message = "OK"), @ApiResponse(code = 400, message = "Something wrong in Server"), @ApiResponse(code = 300, message = "Notice Not found for given noticeId") })
 	public Response getNoticesAfter(@PathParam("timestamp") String timestamp) {
-		System.out.println("Query by latest timestamp : " + timestamp);
+		StringBuffer buffer = new StringBuffer("[");
+
 		List<Notice> notices = crolService.fetchAfter(timestamp);
 
-		List<String> texts = new ArrayList<String>();
-		for (Notice notice : notices) {
-			if (notice.getNoticeText() != null) {
-				texts.add(notice.getNoticeText());
-			}
-		}
-
-		if (texts.size() == 0) {
+		if (notices.size() == 0) {
 			return Response.status(Status.BAD_REQUEST).entity("No Notices Found after the given Date : " + timestamp).build();
 		}
 
-		return Response.status(200).entity(texts).build();
+		int count = 0;
+		for (Notice notice : notices) {
+			if (notice.getNoticeText() != null) {
+				if (count++ >= 1) {
+					buffer.append("\n,\n");
+				}
+				buffer.append(notice.getNoticeText());
+			}
+		}
+		buffer.append("]");
+
+		return Response.status(200).entity(buffer.toString()).build();
 	}
 
 	@POST
@@ -78,13 +86,19 @@ public class CommuneCrolController extends BaseController {
 	public Response saveJson(List<CrolInput> notices) {
 		try {
 			for (CrolInput noticeInput : notices) {
+				Notice notice = getNoticeForId(noticeInput.getRequestId());
+
+				if (notice != null) {
+					crolService.delete(noticeInput.getRequestId());
+				}
+
 				crolService.parseAndSave(noticeInput);
 			}
 		} catch (Exception ex) {
 			return Response.status(Status.BAD_REQUEST).entity("Invalid JSON : " + ex.getMessage()).build();
 		}
 
-		return Response.status(Status.OK).entity("Notice Added.").build();
+		return Response.status(Status.OK).entity("Notice(s) Successfully Added.").build();
 	}
 
 	@PUT

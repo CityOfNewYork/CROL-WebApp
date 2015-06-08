@@ -46,7 +46,7 @@ public class CrolService {
 		String parserOutout = parserCallTest(noticeInput.getAdditionalDescription());
 		System.out.println("Parser Output : " + parserOutout);
 		String output = createFreemarkerOutputFromInput(noticeInput, parserOutout);
-		noticeDao.saveNotice(createNotice(noticeInput, output));
+		noticeDao.saveNotice(createNotice(noticeInput, output), noticeInput);
 	}
 
 	/**
@@ -61,33 +61,35 @@ public class CrolService {
 			Template template = config.getTemplate("template.ftl");
 
 			Map<String, Object> data = new HashMap<String, Object>();
-			data.put("RequestID", input.getRequestId());
-			data.put("ShortTitle", input.getShortTitle());
-			data.put("AdditionalDescription", input.getAdditionalDescription());
-			data.put("SectionID", input.getSectionId());
-			data.put("SectionName", input.getSectionName());
-			data.put("AgencyName", input.getAgencyName());
-			data.put("AgencyCode", input.getAgencyCode());
-			data.put("StartDate", input.getStartDate());
-			data.put("OtherInfo", input.getOtherInfo());
-			data.put("EndDate", input.getEndDate());
 
-			data.put("PIN", "");
-			data.put("Email", "");
-			data.put("DueDate", "");
-			data.put("Printout", "");
-			data.put("OtherInfo", "");
-			data.put("ContactFax", "");
-			data.put("ContactName", "");
-			data.put("ContactPhone", "");
-			data.put("ContractAmount", "");
-			data.put("AddressToSubmit", "");
-			data.put("CategoryDescription", "");
-			data.put("SelectionMethodCode", "");
-			data.put("SpecialCaseReasonCode", "");
-			data.put("SelectionMethodDescription", "");
-			data.put("SpecialCaseReasonDescription", "");
-			data.put("TypeOfNoticeCode", input.getTypeOfNoticeCode());
+			data.put("PIN", checkNullString(input.getPin()));
+			data.put("Email", checkNullString(input.getEmail()));
+			data.put("EndDate", checkNullString(input.getEndDate()));
+			data.put("DueDate", checkNullString(input.getDueDate()));
+			data.put("Printout", checkNullString(input.getPrintout()));
+			data.put("StartDate", checkNullString(input.getStartDate()));
+			data.put("OtherInfo", checkNullString(input.getOtherInfo()));
+			data.put("RequestID", checkNullString(input.getRequestId()));
+			data.put("SectionID", checkNullString(input.getSectionId()));
+			data.put("OtherInfo", checkNullString(input.getOtherInfo()));
+			data.put("ContactFax", checkNullString(input.getContactFax()));
+			data.put("ShortTitle", checkNullString(input.getShortTitle()));
+			data.put("AgencyName", checkNullString(input.getAgencyName()));
+			data.put("AgencyCode", checkNullString(input.getAgencyCode()));
+			data.put("VendorName", checkNullString(input.getVendorName()));
+			data.put("SectionName", checkNullString(input.getSectionName()));
+			data.put("ContactName", checkNullString(input.getContactName()));
+			data.put("ContactPhone", checkNullString(input.getContactPhone()));
+			data.put("VendorAddress", checkNullString(input.getVendorAddress()));
+			data.put("ContractAmount", checkNullString(input.getContractAmount()));
+			data.put("AddressToSubmit", checkNullString(input.getAddressToSubmit()));
+			data.put("TypeOfNoticeCode", checkNullString(input.getTypeOfNoticeCode()));
+			data.put("CategoryDescription", checkNullString(input.getCategoryDescription()));
+			data.put("SelectionMethodCode", checkNullString(input.getSelectionMethodCode()));
+			data.put("AdditionalDescription", checkNullString(input.getAdditionalDescription()));
+			data.put("SpecialCaseReasonCode", checkNullString(input.getSpecialCaseReasonCode()));
+			data.put("SelectionMethodDescription", checkNullString(input.getSelectionMethodDescription()));
+			data.put("SpecialCaseReasonDescription", checkNullString(input.getSpecialCaseReasonDescription()));
 
 			data.put("ParserOutput", parserOutput);
 
@@ -103,6 +105,10 @@ public class CrolService {
 		}
 
 		return null;
+	}
+
+	private Object checkNullString(String string) {
+		return (string == null) ? "" : string;
 	}
 
 	private Notice createNotice(CrolInput noticeInput, String output) {

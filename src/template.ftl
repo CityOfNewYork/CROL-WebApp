@@ -158,9 +158,7 @@ ${ParserOutput}
 "dateCreated": "",
 "dateModified": "",
 "noticeType": {
-
-    <#if TypeOfNoticeCode==1>
-
+    <#if TypeOfNoticeCode=="1">
     "@context": "http://opencontracting.org",
     "@type": "http://opencontracting.org/Tender",
       "uri": "",
@@ -259,10 +257,7 @@ ${ParserOutput}
             }
             } 
             ]
-
-  
-<#elseif TypeOfNoticeCode==2>
-
+<#elseif TypeOfNoticeCode=="2">
 "@context": "http://opencontracting.org",
     "@type": "http://opencontracting.org/Award",
       "uri": "",
@@ -394,10 +389,9 @@ ${ParserOutput}
             }
             }     
             ]
-<#elseif TypeOfNoticeCode==4>
-   "@type": "http://opencontracting.org/Award"
+<#elseif TypeOfNoticeCode=="4">
+   "@type": "http://opencontracting.org/Award",
 "@context": "http://opencontracting.org",
-    "@type": "http://opencontracting.org/Award",
       "uri": "",
       "publishedDate": "${StartDate}",
       "publisher": {
@@ -512,7 +506,7 @@ ${ParserOutput}
             }
             }     
             ]
-<#elseif TypeOfNoticeCode==3>
+<#elseif TypeOfNoticeCode=="3">
     "@context": "http://opencontracting.org",
     "@type": "http://opencontracting.org/Tender",
       "uri": "",
@@ -607,11 +601,11 @@ ${ParserOutput}
             }
             } 
             ]
-<#elseif TypeOfNoticeCode==11>
+<#elseif TypeOfNoticeCode=="11">
       "@type": "http://publicnotice.io/PublicHearing",
       "eventId": "" 
 <#else>
 "@type": "http://publicnotice.io/Other"
 </#if>
-
+}
 }
