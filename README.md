@@ -27,7 +27,7 @@ The web app handles database generated JSON objects and makes them available as 
 
 To invoke the parsers, the client calls the web app specifying the document type ( the combination of NoticeType and Agency) of the data submitted. (As the work progresses, further normalization and standardization will follow to eventually unify the various libraries into one library that can handle all the different Document Types.)
 
- The web app is written in JAVA and and will map the input fields to a new Jstructured JSON-LD object based on a templat.  This is then  in the document oriented database. The web app will then start calling on the individual parsers to enrich the individual JSON objects.
+ The web app is written in JAVA and and will map the input fields to a new Jstructured JSON-LD object based on a template.  This is then  in the document oriented database. The web app will then start calling on the individual parsers to enrich the individual JSON objects.
 
  The complete JSON-LD object will then remained stored and can be quieried through REST calls.
 
@@ -36,7 +36,7 @@ To invoke the parsers, the client calls the web app specifying the document type
  * Python
  * Mongo DB
  * JSON, JSON-LD
- * JSON SChema
+ * JSON Schema
  * REST API
  * GitHub
  * Git
@@ -66,7 +66,7 @@ For more info, please see https://github.com/CityOfNewYork/CROL-Schema
 
 ### Parsing libraries
 
-A parser needs to be deployed as a standalone web- application ([See example](https://github.com/CityOfNewYork/addressparser) . The response has to to validate according to the relevant section of the JSON Schema it seeks to enricj
+A parser needs to be deployed as a standalone web- application ([See example](https://github.com/CityOfNewYork/addressparser). The response has to to validate according to the relevant section of the JSON Schema it seeks to enrich.
 
 Table of available parsers (as of June 3, 2015)
 
