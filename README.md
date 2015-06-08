@@ -134,7 +134,7 @@ There are currently two ways of quering the notices;
 
 - By specifying the last request date. This returns all new notices since last request 
 
-	http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/2015-06-03 (WIP)
+	http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest/2015-06-08T05:12:08.441Z
 
 
 - By specifying the noticeId
