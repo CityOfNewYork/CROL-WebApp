@@ -137,6 +137,10 @@ There are currently two ways of quering the notices;
 		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest/2015-06-08T05:12:08.441Z
 
 
+	Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
+
+
+
 - By specifying the noticeId
 
 		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/12300
