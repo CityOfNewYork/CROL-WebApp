@@ -147,7 +147,7 @@ Example:
 		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest?lastRequestTime=2015-06-03T04:18:58.155Z
 
 
-	Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
+Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
 
 
 
