@@ -133,7 +133,17 @@ The service will allow Public JSON-LD documents (i.e. City Record adverts) to be
 There are currently two ways of quering the notices;
 
 - By specifying the last request date. This returns all new notices since last request 
+	URL: 
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest
+	Header: 
+		lastRequestTime: 2015-06-03T04:18:58.155Z
 
+	Example:
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest?lastRequestTime=2015-06-03T04:18:58.155Z
+
+
+	Example:
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest?lastRequestTime=2015-06-03T04:18:58.155Z
 		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest/2015-06-08T05:12:08.441Z
 
 
