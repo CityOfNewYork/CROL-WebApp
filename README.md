@@ -128,7 +128,7 @@ POST http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice with th
 
 ### GET
 
-The service will allow Public JSON-LD documents (i.e. City Record adverts) to be queried by their various properties through an HTTP request.An authorization token is NOT required.
+The service will allow Public JSON-LD documents (i.e. City Record adverts) to be queried by their various properties through an HTTP request. An authorization token is NOT required.
 
 URL:
 
