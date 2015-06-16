@@ -73,7 +73,7 @@ Table of available parsers (as of June 3, 2015)
 
 Name          |       Object to Enrich             |      Status              |   Notes            | URl
 --------------|------------------------------------|--------------------------|--------------------|--------------
-Address Parser      | refLocation					       |       Draft              |  Handles most addresses, but cannot distinguish between referenced location and meeting location yet.                 |  ([Address Parser Repo](https://github.com/CityOfNewYork/addressparser)
+Address Parser      | refLocation					       |       Draft              |  Handles most addresses, but cannot distinguish between referenced location and meeting location yet.                 |  ([Address Parser Repo](https://github.com/CityOfNewYork/addressparser))
 
 
 
@@ -83,7 +83,7 @@ The web app supports full REST (POST, GET, PUT, DELETE). The web-app supports JS
 
 The web app is currently deployed at: 
 
-http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice
+http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice
 
 NB. Remeber to 
  * only pass cammelCase for the terms (c.f. "requestId")
@@ -102,7 +102,7 @@ To POST one or multiple JSON objects, simply use the POST to the endpoint, passi
 
 Example:
 
-POST http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice with the following
+POST http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice with the following
 
 	[
 	  {
@@ -130,30 +130,36 @@ POST http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice with t
 
 The service will allow Public JSON-LD documents (i.e. City Record adverts) to be queried by their various properties through an HTTP request.An authorization token is NOT required.
 
-There are currently two ways of quering the notices;
-
-- By specifying the last request date. This returns all new notices since last request 
-	
 URL:
 
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice/
+
+
+There are currently two ways of quering the notices, both specified in the header;
+
+- By specifying the last request date. This returns all new notices since last request 
 
 Header: 
 	
-		lastRequestTime: 2015-06-03T04:18:58.155Z
+		lastRequestDate: 2015-06-03T04:18:58.155Z
 
 Example:
 	
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/latest?lastRequestTime=2015-06-03T04:18:58.155Z
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice?lastRequestDate=2015-06-03T04:18:58.155Z
 
 
 Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
 
 
-
 - By specifying the noticeId
 
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/12300
+Header: 
+	
+		noticeId: 20140623999
+
+Example:
+	
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice?noticeId=20140623999
 
 
 
