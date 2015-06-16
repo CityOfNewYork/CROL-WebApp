@@ -137,7 +137,8 @@ URL:
 
 There are currently two ways of quering the notices, both specified in the header;
 
-#####By specifying the last request date. This returns all new notices since last request 
+
+#####Specifying the last request date. This returns all new notices since last request 
 
 Header: 
 	
@@ -151,7 +152,8 @@ Example:
 Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
 
 
-#####By specifying the noticeId
+
+#####Specifying the noticeId
 
 Header: 
 	
