@@ -142,11 +142,11 @@ There are currently two ways of quering the notices, both specified in the heade
 
 Header: 
 	
-		lastRequestDate: 2015-06-03T04:18:58.155Z
+		lastRequestDate: 2015-06-25T04:18:58.155Z
 
 Example:
 	
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice?lastRequestDate=2015-06-03T04:18:58.155Z
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice?lastRequestDate=2015-06-25T04:18:58.155Z
 
 
 Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
