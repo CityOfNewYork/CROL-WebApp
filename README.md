@@ -83,7 +83,7 @@ The web app supports full REST (POST, GET, PUT, DELETE). The web-app supports JS
 
 The web app is currently deployed at: 
 
-http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice
+http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice
 
 NB. Remeber to 
  * only pass cammelCase for the terms (c.f. "requestId")
@@ -102,7 +102,7 @@ To POST one or multiple JSON objects, simply use the POST to the endpoint, passi
 
 Example:
 
-POST http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice with the following
+POST http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice with the following
 
 	[
 	  {
@@ -132,7 +132,7 @@ The service will allow Public JSON-LD documents (i.e. City Record adverts) to be
 
 URL:
 
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice/
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice/
 
 
 There are currently two ways of quering the notices, both specified in the header;
@@ -146,7 +146,7 @@ Header:
 
 Example:
 	
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice?lastRequestDate=2015-06-25T04:18:58.155Z
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice?lastRequestDate=2015-06-25T04:18:58.155Z
 
 
 Dates are expressed using ISO8601, the International Standard for the representation of dates and times. All times are expresed in UTC (Coordinated Universal Time), with the special UTC designator "Z".
@@ -161,7 +161,7 @@ Header:
 
 Example:
 	
-		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v1/notice?noticeId=20140623999
+		http://ec2-52-6-170-221.compute-1.amazonaws.com:8080/crol/v12/notice?noticeId=20140623999
 
 
 
