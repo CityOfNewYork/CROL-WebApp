@@ -50,7 +50,7 @@ public class CrolService {
 	private String createFreemarkerOutputFromInput(CrolInput input, String parserOutput) {
 		try {
             String ftlPath = new java.io.File("/").getCanonicalPath();
-            ftlPath += "template.ftl";
+            ftlPath += "/template.ftl";
 
             Configuration config = new Configuration();
             config.setClassForTemplateLoading(CrolService.class, "");
