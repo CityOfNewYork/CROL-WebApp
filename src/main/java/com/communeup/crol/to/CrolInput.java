@@ -402,7 +402,7 @@ public class CrolInput {
 		this.confirmationNumber = ConfirmationNumber;
 	}
 
-	public Object getNoticeType() {
+	public String getNoticeType() {
 		if (typeOfNoticeCode == 1 || typeOfNoticeCode == 3) {
 			return "Tender";
 		} else if (typeOfNoticeCode == 2 || typeOfNoticeCode == 4) {
@@ -412,6 +412,79 @@ public class CrolInput {
 		}
 
 		return "Other";
+	}
+
+	public String getFieldValue(String fieldName) {
+		if (fieldName.equalsIgnoreCase("AdditionalDescription")) {
+			return this.getAdditionalDescription();
+		} else if (fieldName.equalsIgnoreCase("Pin")) {
+			return this.getPin();
+		} else if (fieldName.equalsIgnoreCase("Email")) {
+			return this.getEmail();
+		} else if (fieldName.equalsIgnoreCase("DueDate")) {
+			return this.getDueDate();
+		} else if (fieldName.equalsIgnoreCase("StartDate")) {
+			return this.getStartDate();
+		} else if (fieldName.equalsIgnoreCase("OtherInfo")) {
+			return this.getOtherInfo();
+		} else if (fieldName.equalsIgnoreCase("AgencyName")) {
+			return this.getAgencyName();
+		} else if (fieldName.equalsIgnoreCase("ShortTitle")) {
+			return this.getShortTitle();
+		} else if (fieldName.equalsIgnoreCase("SectionName")) {
+			return this.getSectionName();
+		} else if (fieldName.equalsIgnoreCase("ContactName")) {
+			return this.getContactName();
+		} else if (fieldName.equalsIgnoreCase("ContactPhone")) {
+			return this.getContactPhone();
+		} else if (fieldName.equalsIgnoreCase("PhoneRequested")) {
+			return this.getPhoneRequested();
+		} else if (fieldName.equalsIgnoreCase("AgencyDivision")) {
+			return this.getAgencyDivision();
+		} else if (fieldName.equalsIgnoreCase("AddressToRequest")) {
+			return this.getAddressToRequest();
+		} else if (fieldName.equalsIgnoreCase("CategoryDescription")) {
+			return this.getCategoryDescription();
+		} else if (fieldName.equalsIgnoreCase("TypeOfNoticeDescription")) {
+			return this.getTypeOfNoticeDescription();
+		} else if (fieldName.equalsIgnoreCase("SelectionMethodDescription")) {
+			return this.getSelectionMethodDescription();
+		} else if (fieldName.equalsIgnoreCase("SpecialCaseReasonDescription")) {
+			return this.getSpecialCaseReasonCode();
+		} else if (fieldName.equalsIgnoreCase("SectionId")) {
+			return this.getSectionId();
+		} else if (fieldName.equalsIgnoreCase("AgencyCode")) {
+			return this.getAgencyCode();
+		} else if (fieldName.equalsIgnoreCase("CategoryCode")) {
+			return this.getCategoryCode();
+		} else if (fieldName.equalsIgnoreCase("TypeOfNoticeCode")) {
+			return this.getTypeOfNoticeCode();
+		} else if (fieldName.equalsIgnoreCase("SelectionMethodCode")) {
+			return this.getSelectionMethodCode();
+		} else if (fieldName.equalsIgnoreCase("SpecialCaseReasonCode")) {
+			return this.getSpecialCaseReasonCode();
+		} else if (fieldName.equalsIgnoreCase("EndDate")) {
+			return this.getEndDate();
+		} else if (fieldName.equalsIgnoreCase("Printout")) {
+			return this.getPrintout();
+		} else if (fieldName.equalsIgnoreCase("RequestId")) {
+			return this.getRequestId();
+		} else if (fieldName.equalsIgnoreCase("VendorName")) {
+			return this.getVendorName();
+		} else if (fieldName.equalsIgnoreCase("ContactFax")) {
+			return this.getContactFax();
+		} else if (fieldName.equalsIgnoreCase("RequestedBy")) {
+			return this.getRequestedBy();
+		} else if (fieldName.equalsIgnoreCase("VendorAddress")) {
+			return this.getVendorAddress();
+		} else if (fieldName.equalsIgnoreCase("ContractAmount")) {
+			return this.getContractAmount();
+		} else if (fieldName.equalsIgnoreCase("AddressToSubmit")) {
+			return this.getAddressToSubmit();
+		} else if (fieldName.equalsIgnoreCase("ConfirmationNumber")) {
+			return this.getConfirmationNumber();
+		}
+		return null;
 	}
 
 }
